@@ -1,343 +1,142 @@
-# 🛒 SmartShop - Backend E-Commerce API
+# 🛒 SmartShop - E-Commerce Backend API
 
-[![Java](https://img.shields.io/badge/Java-17-007396?style=for-the-badge&logo=java&logoColor=white)](https://www.oracle.com/java/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![JWT](https://img.shields.io/badge/JWT-Authentication-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)](https://jwt.io/)
-[![Razorpay](https://img.shields.io/badge/Razorpay-Payment-0C8B3E?style=for-the-badge&logo=razorpay&logoColor=white)](https://razorpay.com/)
+A production-ready e-commerce backend built using Spring Boot, JWT Authentication, MySQL, and Razorpay integration.
 
 ---
 
-## 📌 Project Overview
+## 🚀 Features
 
-**SmartShop** is a production-ready e-commerce backend API built with Spring Boot. It provides secure REST APIs for user authentication, product management, shopping cart, order processing, and payment integration with Razorpay.
-
-### ✨ Key Features
-
-| Feature | Description |
-|---------|-------------|
-| 🔐 **Authentication** | JWT-based secure authentication with role-based access control (USER/ADMIN) |
-| 📦 **Product Management** | Complete CRUD operations with category-based filtering |
-| 🛒 **Shopping Cart** | Add, update, and remove products from cart |
-| 📋 **Order Processing** | Place orders with automatic stock management |
-| 💳 **Payment Integration** | Razorpay payment gateway with verification |
-| 📊 **Admin Dashboard** | Manage products, orders, and users |
+- JWT Authentication & Authorization
+- Role-Based Access Control (USER / ADMIN)
+- Product & Category Management
+- Shopping Cart Management
+- Order Processing
+- Razorpay Payment Integration
+- RESTful API Architecture
+- Global Exception Handling
+- Swagger API Documentation
 
 ---
 
-## 🛠️ Technology Stack
+## 🛠 Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| **Language** | Java 17 |
-| **Framework** | Spring Boot 3.2.5 |
-| **Security** | Spring Security 6.x, JWT |
-| **ORM** | Spring Data JPA (Hibernate) |
-| **Database** | MySQL 8.0 |
-| **Payment** | Razorpay API |
-| **Build Tool** | Maven 3.9+ |
-| **API Documentation** | Swagger/OpenAPI 3.0 |
+| Technology | Version |
+|------------|---------|
+| Java | 17 |
+| Spring Boot | 3.2.5 |
+| Spring Security | 6.x |
+| Spring Data JPA | Hibernate |
+| MySQL | 8 |
+| JWT | Authentication |
+| Razorpay | Payment Gateway |
+| Maven | Build Tool |
 
 ---
 
-## 🗂️ Project Structure
+## 📂 Project Structure
+
 src/main/java/com/smartshop/
-├── controller/ # REST API endpoints
-│ ├── AuthController.java
-│ ├── ProductController.java
-│ ├── CartController.java
-│ ├── OrderController.java
-│ └── CategoryController.java
-├── service/ # Business logic layer
-│ ├── AuthService.java
-│ ├── ProductService.java
-│ ├── CartService.java
-│ ├── OrderService.java
-│ └── impl/ # Service implementations
-├── repository/ # JPA Repository interfaces
-├── entity/ # Database entities (JPA)
-│ ├── User.java
-│ ├── Role.java
-│ ├── Product.java
-│ ├── Category.java
-│ ├── CartItem.java
-│ ├── Order.java
-│ └── OrderItem.java
-├── dto/ # Data Transfer Objects
-├── config/ # Configuration classes
-├── security/ # JWT & Security configuration
-├── payment/ # Razorpay integration
-├── exception/ # Global exception handling
-└── util/ # Utility classes
-
-text
+├── controller/
+├── service/
+├── repository/
+├── entity/
+├── dto/
+├── security/
+├── config/
+├── payment/
+├── exception/
+└── util/
 
 ---
 
-## 📡 API Endpoints
+## 📡 API Modules
 
-### 🔐 Authentication
+### Authentication
+- Register User
+- Login User
 
-| Method | Endpoint | Description | Access |
-|--------|----------|-------------|--------|
-| POST | `/api/auth/register` | Register new user | Public |
-| POST | `/api/auth/login` | Login & get JWT token | Public |
+### Products
+- Create Product
+- Update Product
+- Delete Product
+- Search Products
+- Category Filtering
 
-### 📦 Products
+### Cart
+- Add to Cart
+- Remove from Cart
+- Clear Cart
 
-| Method | Endpoint | Description | Access |
-|--------|----------|-------------|--------|
-| GET | `/api/products` | Get all products | Public |
-| GET | `/api/products/{id}` | Get product by ID | Public |
-| GET | `/api/products/search` | Search products | Public |
-| GET | `/api/products/category/{id}` | Get products by category | Public |
-| POST | `/api/products` | Add new product | Admin |
-| PUT | `/api/products/{id}` | Update product | Admin |
-| DELETE | `/api/products/{id}` | Delete product | Admin |
+### Orders
+- Create Order
+- View Orders
+- Update Order Status
 
-### 🛒 Cart
-
-| Method | Endpoint | Description | Access |
-|--------|----------|-------------|--------|
-| GET | `/api/cart` | Get user cart | User |
-| POST | `/api/cart/add` | Add product to cart | User |
-| DELETE | `/api/cart/remove/{id}` | Remove item from cart | User |
-| DELETE | `/api/cart/clear` | Clear cart | User |
-
-### 📋 Orders
-
-| Method | Endpoint | Description | Access |
-|--------|----------|-------------|--------|
-| POST | `/api/orders/create` | Create order from cart | User |
-| GET | `/api/orders/my-orders` | Get user's orders | User |
-| GET | `/api/orders/{id}` | Get order by ID | User |
-| GET | `/api/orders/all` | Get all orders | Admin |
-| PUT | `/api/orders/{id}/status` | Update order status | Admin |
-
-### 💳 Payment
-
-| Method | Endpoint | Description | Access |
-|--------|----------|-------------|--------|
-| POST | `/api/payment/create/{orderId}` | Create Razorpay order | User |
-| POST | `/api/payment/verify` | Verify payment | User |
+### Payments
+- Razorpay Order Creation
+- Payment Verification
 
 ---
 
-## 💻 Installation & Setup
+## ⚙️ Installation
 
-### Prerequisites
-
-- JDK 17+
-- MySQL 8+
-- Maven 3.9+
-- Git
-- Razorpay Account (for payment)
-
-### Step 1 — Clone Repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/smartshop-backend.git
 cd smartshop-backend
-Step 2 — Database Setup
-sql
+
+---
+
+Database Setup 
 CREATE DATABASE smartshop_db;
-Step 3 — Configure Application
-Update src/main/resources/application.properties:
 
-properties
-# Server
-server.port=8080
-
-# Database
 spring.datasource.url=jdbc:mysql://localhost:3306/smartshop_db
 spring.datasource.username=root
-spring.datasource.password=YOUR_PASSWORD
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.password=your_password
 
-# JPA
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+app.jwt.secret=your_secret_key
 
-# JWT
-app.jwt.secret=YOUR_JWT_SECRET_KEY
-app.jwt.expiration=86400000
+razorpay.key.id=your_key
+razorpay.key.secret=your_secret
 
-# Razorpay
-razorpay.key.id=YOUR_RAZORPAY_KEY_ID
-razorpay.key.secret=YOUR_RAZORPAY_KEY_SECRET
-Step 4 — Build & Run
-bash
-# Build the application
-mvn clean package
-
-# Run the application
+Run Project
+mvn clean install
 mvn spring-boot:run
-Step 5 — Access API
-Base URL: http://localhost:8080
 
-Swagger UI: http://localhost:8080/swagger-ui.html
+API Documentation
 
-OpenAPI Docs: http://localhost:8080/v3/api-docs
+Swagger UI
 
-🔐 Environment Variables (For Production)
-bash
-# Database
-DB_URL=jdbc:mysql://localhost:3306/smartshop_db
-DB_USERNAME=root
-DB_PASSWORD=your_password
+http://localhost:8080/swagger-ui.html
 
-# JWT
-JWT_SECRET=your_jwt_secret_key
+OpenAPI Docs
 
-# Razorpay
-RAZORPAY_KEY_ID=your_key_id
-RAZORPAY_KEY_SECRET=your_key_secret
-🧪 Testing
-bash
-# Run all tests
+http://localhost:8080/v3/api-docs
+
+Testing
 mvn test
 
-# Run specific test class
-mvn test -Dtest=UserServiceTest
-📦 Deployment
-Build JAR
-bash
+Deployment
+
+Build Application
+
 mvn clean package
+
 Run JAR
-bash
-java -jar target/smartshop-ecommerce-0.0.1-SNAPSHOT.jar
-Deploy on Render
-https://render.com/images/deploy-to-render-button.svg
 
-🤝 Contributing
-Fork the repository
+java -jar target/smartshop-ecommerce.jar
 
-Create feature branch
+Author
 
-bash
-git checkout -b feature/AmazingFeature
-Commit changes
-
-bash
-git commit -m "Add some AmazingFeature"
-Push to branch
-
-bash
-git push origin feature/AmazingFeature
-Open a Pull Request
-
-👨‍💻 Author
 Deepak Rathore
 
-GitHub: deepakrathor0789-lab
+GitHub:
+https://github.com/deepakrathor0789-lab
 
-LinkedIn: Deepak Rathore
+LinkedIn:
+(www.linkedin.com/in/deepak-rathor-282925366)
 
-Email: deepakrathor0789@gmail.com
+📄 License
 
-📜 License
-This project is open source and available under the MIT License.
-
-🙏 Acknowledgments
-Spring Boot Documentation
-
-JWT.io
-
-Razorpay API
-
-Baeldung
-
-📊 GitHub Stats
-https://img.shields.io/github/stars/deepakrathor0789-lab/smartshop-backend
-https://img.shields.io/github/forks/deepakrathor0789-lab/smartshop-backend
-https://img.shields.io/github/issues/deepakrathor0789-lab/smartshop-backend
-https://img.shields.io/github/license/deepakrathor0789-lab/smartshop-backend
-
-## 💻 Installation & Setup
-
-### Prerequisites
-- JDK 17+
-- MySQL 8+
-- Maven 3.9+
-- Git
-- Razorpay Account (for payment)
-
-### Step 1 — Clone Repository
-```bash
-git clone https://github.com/deepakrathor0789-lab/smartshop-backend.git
-cd smartshop-backend
-```
-
-### Step 2 — Database Setup
-```sql
-CREATE DATABASE smartshop_db;
-```
-
-### Step 3 — Configure Application
-
-Update `src/main/resources/application.properties`:
-
-```properties
-# Server
-server.port=8080
-
-# Database
-spring.datasource.url=jdbc:mysql://localhost:3306/smartshop_db
-spring.datasource.username=root
-spring.datasource.password=YOUR_PASSWORD
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
-# JPA
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-
-# JWT
-app.jwt.secret=YOUR_JWT_SECRET_KEY
-app.jwt.expiration=86400000
-
-# Razorpay
-razorpay.key.id=YOUR_RAZORPAY_KEY_ID
-razorpay.key.secret=YOUR_RAZORPAY_KEY_SECRET
-```
-
-### Step 4 — Build & Run
-```bash
-mvn clean package
-mvn spring-boot:run
-```
-
-### Step 5 — Access API
-- **Base URL:** `http://localhost:8080`
-- **Swagger UI:** `http://localhost:8080/swagger-ui.html`
-
----
-
-## 🔐 Environment Variables (For Production)
-
-```bash
-DB_URL=jdbc:mysql://localhost:3306/smartshop_db
-DB_USERNAME=root
-DB_PASSWORD=your_password
-JWT_SECRET=your_jwt_secret_key
-RAZORPAY_KEY_ID=your_key_id
-RAZORPAY_KEY_SECRET=your_key_secret
-```
-
----
-
-## 👨‍💻 Author
-
-**Deepak Rathore**
-- GitHub: [deepakrathor0789-lab](https://github.com/deepakrathor0789-lab)
-- Email: deepakrathor0789@gmail.com
-
----
-
-## 📜 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-⭐ **If you find this project useful, please give it a star!**
+This project is licensed under the MIT License.
